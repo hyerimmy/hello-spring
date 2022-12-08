@@ -2,6 +2,7 @@ package hyerimland.hellospring.service;
 
 import hyerimland.hellospring.domain.Member;
 import hyerimland.hellospring.repository.MemoryMemberRepository;
+import hyerimland.hellospring.service.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,14 +14,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberService();
+    MemberService memberService;
     MemoryMemberRepository memberRepository;
-
-    // 함수 실행 이후마다 리포지토리 리셋
-    @AfterEach
-    public void afterEach(){
-        memberRepository.clearStore();
-    }
 
     // 같은 레포지토리 사용할 수 있도록 하는 구조 (**??**이해안감)
     //MemberService 입장에서 외부에서 리포지토리를 넣어줌. 공통된 리포지토리 사용하게 됨. DIA
@@ -28,6 +23,13 @@ class MemberServiceTest {
     public void beforeEach() {
         memberRepository = new MemoryMemberRepository();
         memberService = new MemberService(memberRepository);
+    }
+
+
+    // 함수 실행 이후마다 리포지토리 리셋
+    @AfterEach
+    public void afterEach(){
+        memberRepository.clearStore();
     }
 
     @Test

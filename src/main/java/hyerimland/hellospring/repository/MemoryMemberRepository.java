@@ -1,8 +1,11 @@
 package hyerimland.hellospring.repository;
 
 import hyerimland.hellospring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
+
+@Repository
 
 public class MemoryMemberRepository implements MemberRepository{
 
