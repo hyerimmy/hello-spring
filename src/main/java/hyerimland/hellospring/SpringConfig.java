@@ -1,6 +1,7 @@
 package hyerimland.hellospring;
 
 import hyerimland.hellospring.repository.JdbcMemberRepository;
+import hyerimland.hellospring.repository.JdbcTemplateMemberRepository;
 import hyerimland.hellospring.repository.MemberRepository;
 import hyerimland.hellospring.repository.MemoryMemberRepository;
 import hyerimland.hellospring.service.MemberService;
@@ -27,6 +28,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+//        return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
