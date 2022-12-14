@@ -1,13 +1,11 @@
 package hyerimland.hellospring;
 
-import hyerimland.hellospring.repository.JdbcMemberRepository;
-import hyerimland.hellospring.repository.JdbcTemplateMemberRepository;
-import hyerimland.hellospring.repository.MemberRepository;
-import hyerimland.hellospring.repository.MemoryMemberRepository;
+import hyerimland.hellospring.repository.*;
 import hyerimland.hellospring.service.MemberService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
@@ -15,9 +13,11 @@ import javax.xml.crypto.Data;
 public class SpringConfig {
 
     private final DataSource dataSource;
+    private final EntityManager em;
 
-    public SpringConfig(DataSource dataSource) {
+    public SpringConfig(DataSource dataSource, EntityManager em) {
         this.dataSource = dataSource;
+        this.em = em;
     }
 
     @Bean
@@ -29,6 +29,7 @@ public class SpringConfig {
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
 //        return new JdbcMemberRepository(dataSource);
-        return new JdbcTemplateMemberRepository(dataSource);
+//        return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 }
